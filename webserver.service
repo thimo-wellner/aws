@@ -1,0 +1,15 @@
+[Unit]
+Description=Weather webserver systemd service.
+After=network.target
+
+[Service]
+Type=simple
+EnvironmentFile=/env.sh
+PassEnvironment=DB_USER DB_PASS DB_HOST DB_PORT DB_NAME BUCKET_NAME
+WorkingDirectory=/
+ExecStartPre=/bin/bash -l -c 'env >/tmp/ingest.err'
+ExecStart=/weather-webserver
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

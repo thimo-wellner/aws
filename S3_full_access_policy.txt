@@ -1,0 +1,22 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Principal": "*",
+            "Action": "s3:GetObject",
+            "Resource": "arn:aws:s3:::YOUR_BUCKET_NAME_HERE/*"
+        },
+        {
+            "Effect": "Deny",
+            "Principal": "*",
+            "Action": "s3:GetObject",
+            "Resource": "arn:aws:s3:::YOUR_BUCKET_NAME_HERE/*",
+            "Condition": {
+                "StringEquals": {
+                    "s3:ExistingObjectTag/public": "no"
+                }
+            }
+        }
+    ]
+}
